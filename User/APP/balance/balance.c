@@ -48,11 +48,11 @@ void Balance_Control(float angle)
 
     float pwm;
 
-    if(fabsf(angle) > 30.0f)
-    {
-        Motor_Stop();
-        return;
-    }
+    // if(fabsf(angle) > 60.0f)
+    // {
+    //     Motor_Stop();
+    //     return;
+    // }
 
     /*
         目标角度为3
