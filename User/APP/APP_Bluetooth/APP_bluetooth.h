@@ -26,6 +26,14 @@ void BT_APP_proc(void);
 
 /* 数据获取 */
 BT_APP_Data_t* BT_APP_GetData(void);
+uint8_t BT_APP_GetMotorEnable(void);
+uint8_t BT_APP_GetMode(void);
+uint8_t BT_APP_GetPidType(void);
+float BT_APP_GetData1(void);
+float BT_APP_GetData2(void);
+float BT_APP_GetData3(void);
+float BT_APP_GetTargetSpeed(void);
+float BT_APP_GetTargetTurn(void);
 
 /* 更新标志 */
 uint8_t BT_APP_IsUpdated(void);

@@ -92,6 +92,61 @@ BT_APP_Data_t* BT_APP_GetData(void)
 
 
 /*************************************************
+ * 便捷数据获取
+ *************************************************/
+uint8_t BT_APP_GetMotorEnable(void)
+{
+    return bt_app_data.enable;
+}
+
+
+uint8_t BT_APP_GetMode(void)
+{
+    return bt_app_data.mode;
+}
+
+
+uint8_t BT_APP_GetPidType(void)
+{
+    return bt_app_data.pid_type;
+}
+
+
+float BT_APP_GetData1(void)
+{
+    return bt_app_data.data1;
+}
+
+
+float BT_APP_GetData2(void)
+{
+    return bt_app_data.data2;
+}
+
+
+float BT_APP_GetData3(void)
+{
+    return bt_app_data.data3;
+}
+
+
+float BT_APP_GetTargetSpeed(void)
+{
+    if(bt_app_data.mode == 1)
+        return bt_app_data.data1;
+    return 0;
+}
+
+
+float BT_APP_GetTargetTurn(void)
+{
+    if(bt_app_data.mode == 1)
+        return bt_app_data.data2;
+    return 0;
+}
+
+
+/*************************************************
  * 更新标志
  *************************************************/
 uint8_t BT_APP_IsUpdated(void)

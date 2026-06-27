@@ -22,9 +22,9 @@ void Balance_Init(void)
 
     PID_Init(&balance_pid,
 
-             30.0f,    // Kp
-             0.0f,     // Ki
-             0.8f,     // Kd
+             BT_APP_GetData1(),    // Kp
+             BT_APP_GetData2(),    // Ki
+             BT_APP_GetData3(),    // Kd
 
              100,
 

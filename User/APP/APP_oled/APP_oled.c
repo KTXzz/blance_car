@@ -26,7 +26,12 @@ void OLED_Proc(void)
 
     // --- 以下代码只在需要刷新时才执行 ---
     // ===================== 获取蓝牙数据 =====================
-    BT_Data_t *bt = Bluetooth_GetData();
+    uint8_t mode = BT_APP_GetMode();
+    uint8_t enable = BT_APP_GetMotorEnable();
+    uint8_t pid_type = BT_APP_GetPidType();
+    float data1 = BT_APP_GetData1();
+    float data2 = BT_APP_GetData2();
+    float data3 = BT_APP_GetData3();
 
     // ===================== 第一行：系统状态栏 =====================
     // MODE: 0=PID调参 1=遥控
@@ -37,30 +42,30 @@ void OLED_Proc(void)
 
     OLED_ShowString(0, 0, "                ", 16); // 清行
 
-    if (bt->mode == 0)
+    if (mode == 0)
     {
         sprintf(line, "PID %s  %s",
-                bt->enable ? "ON" : "OFF",
+                enable ? "ON" : "OFF",
                 "BT");
     }
     else
     {
         sprintf(line, "RC  %s   %s",
-                bt->enable ? "ON" : "OFF",
+                enable ? "ON" : "OFF",
                 "BT");
     }
 
     OLED_ShowString(0, 0, line, 16);
 
     // ===================== PID模式界面 =====================
-    if (bt->mode == 0)
+    if (mode == 0)
     {
         // -------- 第二行：当前PID类型 --------
         OLED_ShowString(0, 2, "                ", 16);
 
-        if (bt->pid_type == PID_BALANCE)
+        if (pid_type == PID_BALANCE)
             OLED_ShowString(0, 2, "BAL PID", 16);
-        else if (bt->pid_type == PID_SPEED)
+        else if (pid_type == PID_SPEED)
             OLED_ShowString(0, 2, "SPD PID", 16);
         else
             OLED_ShowString(0, 2, "TRN PID", 16);
@@ -68,7 +73,7 @@ void OLED_Proc(void)
         // -------- 第三行：Pid参数 --------
         OLED_ShowString(0, 4, "                ", 16);
         char buf[20];
-        sprintf(buf, "%4.2f %4.2f %4.2f", bt->data1, bt->data2, bt->data3);
+        sprintf(buf, "%4.2f %4.2f %4.2f", data1, data2, data3);
         OLED_ShowString(0, 4, buf, 16);
 
         // ===== 第4行 =====
@@ -83,11 +88,11 @@ void OLED_Proc(void)
         // -------- 第二行：速度  --------
         OLED_ShowString(0, 2, "                ", 16);
         char buf[20];
-        sprintf(buf, "SPD:%4.1f", bt->data1);
+        sprintf(buf, "SPD:%4.1f", BT_APP_GetTargetSpeed());
         OLED_ShowString(0, 2, buf, 16);
            // -------- 第三行：转向  --------
         OLED_ShowString(0, 4, "                ", 16);
-        sprintf(buf, "TRN:%4.1f", bt->data2);
+        sprintf(buf, "TRN:%4.1f", BT_APP_GetTargetTurn());
         OLED_ShowString(0, 4, buf, 16);
 
         // -------- 第四行：角度（可选） --------
