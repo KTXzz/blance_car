@@ -55,8 +55,6 @@ add_executable(${CMAKE_PROJECT_NAME}
         User/BSP/BLUETOOTH/bluetooth.h
         User/APP/APP_Bluetooth/APP_bluetooth.c
         User/APP/APP_Bluetooth/APP_bluetooth.h
-        User/APP/speed/speed.c
-        User/APP/speed/speed.h
 )
 
 # Add STM32CubeMX generated sources
@@ -85,7 +83,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         User/APP/balance
         User/BSP/BLUETOOTH
         User/APP/APP_Bluetooth
-        User/APP/speed
         test
         # Add user defined include path
 )

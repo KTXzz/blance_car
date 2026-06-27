@@ -167,7 +167,7 @@ void MPU6050_Proc()
 }
 
 
-float MPU6050_g_y(void)         { return mpu.g_y; }
+float MPU6050_g_z(void)         { return mpu.g_z; }
 float MPU6050_GetPitch(void) { return mpu.pitch; }
 float MPU6050_GetRoll(void)  { return mpu.roll; }
 float MPU6050_GetYaw(void)   { return mpu.yaw; }

@@ -33,9 +33,9 @@
 #include "APP_oled.h"
 #include "control.h"
 #include "encoder.h"
-#include "balance.h"
 #include "bluetooth.h"
 #include "APP_bluetooth.h"
+#include "pid.h"
 
 /* USER CODE END Includes */
 
@@ -114,7 +114,7 @@ int main(void)
   MPU6050_Init();
   Motor_Init();
   Encoder_Init();
-  Balance_Init();
+  PID_InitAll();
   Bluetooth_Init();
   BT_APP_Init();
 

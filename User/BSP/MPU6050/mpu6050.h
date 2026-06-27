@@ -56,7 +56,7 @@ void MPU6050_CalcGyroAngle(void);//陀螺仪计算角度
 void MPU6050_Proc(void);
 
 //float MPU6050_Proc(void);
-float MPU6050_g_y(void);
+float MPU6050_g_z(void);
 float MPU6050_GetPitch(void);
 float MPU6050_GetRoll(void);
 float MPU6050_GetYaw(void);
