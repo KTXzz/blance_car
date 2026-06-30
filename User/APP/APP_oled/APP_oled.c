@@ -7,8 +7,8 @@
 #include <stdio.h>
 #include "mpu6050.h"
 #include "encoder.h"
-#include "bluetooth.h" 
 #include "APP_bluetooth.h"
+#include "control.h"
 
 // ===================== PID类型枚举 =====================
 #define PID_BALANCE 0
@@ -25,13 +25,16 @@ void OLED_Proc(void)
     last_update = now;
 
     // --- 以下代码只在需要刷新时才执行 ---
-    // ===================== 获取蓝牙数据 =====================
+    // ===================== 获取实际状态数据 =====================
     uint8_t mode = BT_APP_GetMode();
-    uint8_t enable = BT_APP_GetMotorEnable();
+    uint8_t enable = motor_enable;
     uint8_t pid_type = BT_APP_GetPidType();
-    float data1 = BT_APP_GetData1();
-    float data2 = BT_APP_GetData2();
-    float data3 = BT_APP_GetData3();
+
+    PID_t *pid = &balance_pid;
+    if (pid_type == PID_SPEED)
+        pid = &speed_pid;
+    else if (pid_type == PID_TURN)
+        pid = &turn_pid;
 
     // ===================== 第一行：系统状态栏 =====================
     // MODE: 0=PID调参 1=遥控
@@ -73,7 +76,7 @@ void OLED_Proc(void)
         // -------- 第三行：Pid参数 --------
         OLED_ShowString(0, 4, "                ", 16);
         char buf[20];
-        sprintf(buf, "%4.2f %4.2f %4.2f", data1, data2, data3);
+        sprintf(buf, "%4.2f %4.2f %4.2f", pid->kp, pid->ki, pid->kd);
         OLED_ShowString(0, 4, buf, 16);
 
         // ===== 第4行 =====
@@ -88,11 +91,11 @@ void OLED_Proc(void)
         // -------- 第二行：速度  --------
         OLED_ShowString(0, 2, "                ", 16);
         char buf[20];
-        sprintf(buf, "SPD:%4.1f", BT_APP_GetTargetSpeed());
+        sprintf(buf, "SPD:%4.1f", target_speed);
         OLED_ShowString(0, 2, buf, 16);
            // -------- 第三行：转向  --------
         OLED_ShowString(0, 4, "                ", 16);
-        sprintf(buf, "TRN:%4.1f", BT_APP_GetTargetTurn());
+        sprintf(buf, "TRN:%4.1f", target_turn);
         OLED_ShowString(0, 4, buf, 16);
 
         // -------- 第四行：角度（可选） --------

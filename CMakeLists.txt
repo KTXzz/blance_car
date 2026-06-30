@@ -37,8 +37,6 @@ add_executable(${CMAKE_PROJECT_NAME}
         User/BSP/OLED/OLED.h
         User/BSP/Motor/Motor.c
         User/BSP/Motor/Motor.h
-        test/motor_test.c
-        test/motor_test.h
         User/BSP/MPU6050/mpu6050.c
         User/BSP/MPU6050/mpu6050.h
         User/APP/APP_oled/APP_oled.c

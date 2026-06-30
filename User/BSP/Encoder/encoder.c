@@ -5,9 +5,6 @@
 #include "encoder.h"
 #include "tim.h"
 
-#include "encoder.h"
-#include "tim.h"
-
 Encoder_t encoder;
 
 void Encoder_Init(void)

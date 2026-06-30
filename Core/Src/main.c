@@ -28,7 +28,6 @@
 #include "oled.h"
 #include <stdio.h>
 #include <Motor.h>
-#include "motor_test.h"
 #include "mpu6050.h"
 #include "APP_oled.h"
 #include "control.h"
@@ -110,7 +109,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   OLED_Init();
   OLED_Clear();
-
   MPU6050_Init();
   Motor_Init();
   Encoder_Init();
